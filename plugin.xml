@@ -6,11 +6,15 @@
          id="product"
          point="org.eclipse.core.runtime.products">
       <product
-            name="xjltouch"
+            name="xjl-touch"
             application="org.eclipse.e4.ui.workbench.swt.E4Application">
          <property
                name="applicationCSS"
                value="platform:/plugin/xjl-touch/css/default.css">
+         </property>
+         <property
+               name="appName"
+               value="xjl-touch">
          </property>
       </product>
    </extension>

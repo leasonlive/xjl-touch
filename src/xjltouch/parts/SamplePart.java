@@ -11,6 +11,7 @@
  *******************************************************************************/
 package xjltouch.parts;
 
+
 import javax.annotation.PostConstruct;
 import javax.inject.Inject;
 
@@ -19,48 +20,73 @@ import org.eclipse.e4.ui.di.Persist;
 import org.eclipse.e4.ui.model.application.ui.MDirtyable;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.ControlEvent;
+import org.eclipse.swt.events.ControlListener;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
+import org.eclipse.swt.events.MouseEvent;
+import org.eclipse.swt.events.MouseListener;
+import org.eclipse.swt.events.TouchEvent;
+import org.eclipse.swt.events.TouchListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 
 public class SamplePart {
-
-	private Text txtInput;
-	private TableViewer tableViewer;
+	
 
 	@Inject
 	private MDirtyable dirty;
 
 	@PostConstruct
 	public void createComposite(Composite parent) {
-		parent.setLayout(new GridLayout(1, false));
-
-		txtInput = new Text(parent, SWT.BORDER);
-		txtInput.setMessage("Enter text to mark part as dirty");
-		txtInput.addModifyListener(new ModifyListener() {
+		parent.setLayout(new GridLayout(2, false));
+		Button paihao = new Button(parent, SWT.BORDER);
+		paihao.setText("排号");
+		paihao.addTouchListener(new TouchListener() {
 			@Override
-			public void modifyText(ModifyEvent e) {
-				dirty.setDirty(true);
+			public void touch(TouchEvent arg0) {
+				paihao.setText("100号");
 			}
 		});
-		txtInput.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-
-		tableViewer = new TableViewer(parent);
-
-		tableViewer.add("Sample item 1");
-		tableViewer.add("Sample item 2");
-		tableViewer.add("Sample item 3");
-		tableViewer.add("Sample item 4");
-		tableViewer.add("Sample item 5");
-		tableViewer.getTable().setLayoutData(new GridData(GridData.FILL_BOTH));
+		paihao.addMouseListener(new MouseListener() {
+			
+			@Override
+			public void mouseUp(MouseEvent arg0) {
+				
+			}
+			
+			@Override
+			public void mouseDown(MouseEvent arg0) {
+				paihao.setText("101号");
+			}
+			
+			@Override
+			public void mouseDoubleClick(MouseEvent arg0) {
+				paihao.setText("排号");
+				
+			}
+		});
+		Button baobiao = new Button(parent, SWT.BORDER);
+		baobiao.setText("报表");
+		Button zhengjian = new Button(parent, SWT.BORDER);
+		zhengjian.setText("证件");
+		Button 认证 = new Button(parent, SWT.BORDER);
+		认证.setText("认证");
+		Button shenbao = new Button(parent, SWT.BORDER);
+		shenbao.setText("申报");
+		Button 查询 = new Button(parent, SWT.BORDER);
+		查询.setText("查询");
+		Button 导航 = new Button(parent, SWT.BORDER);
+		导航.setText("导航");
 	}
 
 	@Focus
 	public void setFocus() {
-		tableViewer.getTable().setFocus();
+		
 	}
 
 	@Persist
